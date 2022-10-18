@@ -59,7 +59,9 @@ def t_NUMERO_REAL( t ) :
     return t
 
 def t_TAG_HTML( t ) :
-    r'^<[a-zA-Z0-9 -_./:=&"%+?@\$! \s]+>?$'
+    #[<]+(.*?)+[>] verificar esse uso, do tobias
+    #r'^<[a-zA-Z0-9 -_./:=&"%+?@\$! \s]+>$'
+    r'^[<]+(.*?)+[>]$'
     return t
 
 def t_error( t ):
@@ -109,33 +111,53 @@ def p_error( p ):
 
 parser = yacc.yacc()
 
+# Inicio dos testes
 print("#---------------------------#")
 print("|     Testes de tokens      |")
 print("#---------------------------#\n\n")
 resTelefoneCelular = parser.parse("51993005511")
 print(f"TelefoneCelular = {resTelefoneCelular}")
-print("\n")
+resTelefoneCelular = parser.parse("51787535135")
+print(f"Invalid TelefoneCelular = {resTelefoneCelular}")
+print("_________________________________________\n")
 resPlaca = parser.parse("ILP5577")
 print(f"Placa = {resPlaca}")
-print("\n")
+resPlaca = parser.parse("I5P6987")
+print(f"Invalid Placa = {resPlaca}")
+print("_________________________________________\n")
 resCpf = parser.parse("031.789.780-24")
 print(f"CPF = {resCpf}")
-print("\n")
+resCpf = parser.parse("03178978024")
+print(f"Invalid CPF = {resCpf}")
+print("_________________________________________\n")
 resNumerosReais = parser.parse("456.33333")
 print(f"NumerosReais = {resNumerosReais}")
-print("\n")
+resNumerosReais = parser.parse("45633333")
+print(f"Invalid NumerosReais = {resNumerosReais}")
+print("_________________________________________\n")
 resTagsHtml = parser.parse("<p>")
 print(f"TagsHTML = {resTagsHtml}")
-print("\n")
+resTagsHtml = parser.parse("<p")
+print(f"Invalid TagsHTML = {resTagsHtml}")
+print("_________________________________________\n")
 resUrl = parser.parse("https://abc.com")
 print(f"URL = {resUrl}")
-print("\n")
+resUrl = parser.parse("htts://as.com.br")
+print(f"Invalid URL = {resUrl}")
+print("_________________________________________\n")
 resPalavras = parser.parse("éDeCasa")
 print(f"Palavras = {resPalavras}")
-print("\n")
+resPalavras = parser.parse("é de casa")
+print(f"Invalid Palavras = {resPalavras}")
+print("_________________________________________\n")
 resCnpj = parser.parse("01234567890123")
 print(f"CNPJ = {resCnpj}")
-print("\n")
+resCnpj = parser.parse("0123456789012")
+print(f"Invalid CNPJ = {resCnpj}")
+print("_________________________________________\n")
 resIdC = parser.parse("int")
 print(f"IdC = {resIdC}")
-print("\n")
+#nao reconhece como identificador do C, mas como uma palavra valida
+resIdC = parser.parse("inteiro")
+print(f"Invalid IdC = {resIdC}")
+print("_________________________________________\n")
