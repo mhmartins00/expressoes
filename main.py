@@ -88,11 +88,6 @@ def p_placa( p ):
     p[0] = f'PLACA VÁLIDA'
     # print(f"CPF = {p}")
 
-def p_placa( p ):
-    'expr : URL'
-    p[0] = f'URL VÁLIDA'
-    # print(f"CPF = {p}")
-
 def p_cnpj( p ):
     'expr : CNPJ'
     p[0] = f'CNPJ VÁLIDO'
@@ -123,5 +118,5 @@ def p_error( p ):
 
 parser = yacc.yacc()
 
-res = parser.parse("ASAD6676")
+res = parser.parse("ASD6676")
 print(f"RES = {res}")
