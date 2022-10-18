@@ -51,21 +51,16 @@ def t_PALAVRA_RESERVADA_C( t ) :
     return t
 
 def t_PALAVRA( t ) :
-    r'^[a-zA-ZÀ-ÿ \s]+$' #Validar necessidade do \s que corresponde ao whitespace
+    r'^[a-zA-ZÀ-ÿ]+$' #Validar necessidade do \s que corresponde ao whitespace
     return t
 
 def t_NUMERO_REAL( t ) :
-    r'^[0-9]+.[0-9]+$' #Validar necessidade do \s que corresponde ao whitespace
+    r'^[0-9]+[.][0-9]+$' #Validar necessidade do \s que corresponde ao whitespace
     return t
 
 def t_TAG_HTML( t ) :
-    r'^<[a-zA-Z0-9 -_./:=&"%+?@\$! \s]+>$' #Validar necessidade do \s que corresponde ao whitespace
+    r'^<[a-zA-Z0-9 -_./:=&"%+?@\$! \s]+>?$' #Validar necessidade do \s que corresponde ao whitespace
     return t
-
-# def t_newline( t ):
-#   r'\n+'
-#   print("t_newline")
-#   t.lexer.lineno += len( t.value 
 
 def t_error( t ):
   print("Invalid Token:",t.value)
@@ -88,7 +83,7 @@ def p_placa( p ):
     p[0] = f'PLACA VÁLIDA'
     # print(f"CPF = {p}")
 
-def p_placa( p ):
+def p_url( p ):
     'expr : URL'
     p[0] = f'URL VÁLIDA'
     # print(f"CPF = {p}")
@@ -123,5 +118,30 @@ def p_error( p ):
 
 parser = yacc.yacc()
 
-res = parser.parse("ASAD6676")
-print(f"RES = {res}")
+resTelefoneCelular = parser.parse("51993005511")
+print(f"TelefoneCelular = {resTelefoneCelular}")
+print("\n")
+resPlaca = parser.parse("ILP5577")
+print(f"Placa = {resPlaca}")
+print("\n")
+resCpf = parser.parse("031.789.780-24")
+print(f"CPF = {resCpf}")
+print("\n")
+resNumerosReais = parser.parse("456.33333")
+print(f"NumerosReais = {resNumerosReais}")
+print("\n")
+resTagsHtml = parser.parse("<p>")
+print(f"TagsHTML = {resTagsHtml}")
+print("\n")
+resUrl = parser.parse("https://abc.com")
+print(f"URL = {resUrl}")
+print("\n")
+resPalavras = parser.parse("éDeCasa")
+print(f"Palavras = {resPalavras}")
+print("\n")
+resCnpj = parser.parse("01234567890123")
+print(f"CNPJ = {resCnpj}")
+print("\n")
+resIdC = parser.parse("int")
+print(f"IdC = {resIdC}")
+print("\n")
