@@ -13,6 +13,7 @@ tokens = (
     'TAG_HTML'
 )
 
+# REGEX PARA VALIDACOES
 # t_CELULAR = r'^[0-9]{2}9[0-9]{8}$'
 # t_CPF = r'^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$'
 # t_PLACA = r'^[a-zA-Z]{3}[0-9]{4}$'
@@ -31,7 +32,6 @@ def t_CELULAR( t ) :
 
 def t_CPF( t ) :
     r'^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$'
-    # print(f"valor de t_CPF = {t} t.value = {t.value}")
     return t
 
 def t_PLACA( t ) :
@@ -47,19 +47,19 @@ def t_CNPJ( t ) :
     return t
 
 def t_PALAVRA_RESERVADA_C( t ) :
-    r'^(auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while|printf)$' #Validar necessidade do \s que corresponde ao whitespace
+    r'^(auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while|printf)$'
     return t
 
 def t_PALAVRA( t ) :
-    r'^[a-zA-ZÀ-ÿ]+$' #Validar necessidade do \s que corresponde ao whitespace
+    r'^[a-zA-ZÀ-ÿ]+$'
     return t
 
 def t_NUMERO_REAL( t ) :
-    r'^[0-9]+[.][0-9]+$' #Validar necessidade do \s que corresponde ao whitespace
+    r'^[0-9]+[.][0-9]+$'
     return t
 
 def t_TAG_HTML( t ) :
-    r'^<[a-zA-Z0-9 -_./:=&"%+?@\$! \s]+>?$' #Validar necessidade do \s que corresponde ao whitespace
+    r'^<[a-zA-Z0-9 -_./:=&"%+?@\$! \s]+>?$'
     return t
 
 def t_error( t ):
@@ -71,53 +71,47 @@ lexer = lex.lex()
 def p_celular( p ):
     'expr : CELULAR'
     p[0] = f'CELULAR VÁLIDO'
-    # print(f"CPF = {p}")
 
 def p_cpf( p ):
     'expr : CPF'
     p[0] = f'CPF VÁLIDO'
-    # print(f"CPF = {p}")
 
 def p_placa( p ):
     'expr : PLACA'
     p[0] = f'PLACA VÁLIDA'
-    # print(f"CPF = {p}")
 
 def p_url( p ):
     'expr : URL'
     p[0] = f'URL VÁLIDA'
-    # print(f"CPF = {p}")
 
 def p_cnpj( p ):
     'expr : CNPJ'
     p[0] = f'CNPJ VÁLIDO'
-    # print(f"CPF = {p}")
 
 def p_palavra_reservada_c( p ):
     'expr : PALAVRA_RESERVADA_C'
     p[0] = f'PALAVRA RESERVADA DA LINGUAGEM C'
-    # print(f"CPF = {p}")
 
 def p_palavra( p ):
     'expr : PALAVRA'
     p[0] = f'PALAVRA VÁLIDA'
-    # print(f"CPF = {p}")
 
 def p_numero_real( p ):
     'expr : NUMERO_REAL'
     p[0] = f'NUMERO REAL VÁLIDO'
-    # print(f"CPF = {p}")
 
 def p_tag_html( p ):
     'expr : TAG_HTML'
     p[0] = f'TAG HTML VÁLIDA'
-    # print(f"CPF = {p}")
 
 def p_error( p ):
     print("Syntax error in input!")
 
 parser = yacc.yacc()
 
+print("#---------------------------#")
+print("|     Testes de tokens      |")
+print("#---------------------------#\n\n")
 resTelefoneCelular = parser.parse("51993005511")
 print(f"TelefoneCelular = {resTelefoneCelular}")
 print("\n")
