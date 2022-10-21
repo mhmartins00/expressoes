@@ -1,4 +1,5 @@
 #  README
+# Alunos: Douglas Moeller, Murillo Martins
 #  Para executar basta estar no mesmo diretório do arquivo main.py e digitar > python main.py.
 # 1) número de telefone celular = 00900000000 [obrigatorio o comeco com o 9]
 # 2) placas de carro = xxx0000 | XXX000 [3 letras seguidas por 4 numeros]
